@@ -1,0 +1,90 @@
+/* Base Application Styles */
+body {
+  color: #fff;
+  background: #222;
+}
+
+.main {
+    padding: 10px;
+    position: relative;
+}
+
+.suggest-list {
+    color: #555;
+    background: white;
+    position: absolute;
+    top: 32%;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+.suggest-list>li>a {
+    padding-left: 5px;
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.suggest-list>li>a:hover {
+    background: #428BCA;
+    color: white;
+}
+
+.cloud {
+    margin-top: 25px;
+    background-color: white;
+    height: 150px;
+    width: 650px;
+    margin-bottom: 10px;
+}
+
+.tag {
+    color: #333;
+    background: #999;
+    border-radius: 5px;
+    float: left;
+    padding: 5px;
+    margin: 10px;
+}
+
+.remove {
+    float: right;
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+    background-color: grey;
+    border-radius: 10px;
+}
+
+.remove>a {
+    padding-left: 5px;
+    color: #333;
+}
+
+.message {
+    height: 25px;
+}
+
+.index img {
+  margin: 40px auto;
+  border-radius: 4px;
+  background: #fff;
+  display: block;
+}
+
+.index .notice {
+  margin: 20px auto;
+  padding: 15px 0;
+  text-align: center;
+  border: 1px solid #000;
+  border-width: 1px 0;
+  background: #666;
+}
