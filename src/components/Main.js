@@ -4,7 +4,6 @@ require('styles/App.css');
 import $ from 'jquery';
 import jsonp from 'jsonp';
 import React from 'react';
-import InputComponent from './tags/InputComponent';
 
 
 let suggestUrl = 'http://suggestqueries.google.com/complete/search' +
@@ -130,7 +129,11 @@ class AppComponent extends React.Component {
     render() {
         return <div className="main">
             <h1>Twitter Cloud</h1>
-            <InputComponent/>
+            <input className="tags-input" type="text" value={this.state.value}
+        onChange={this.handleChange}
+        onBlur={() => { setTimeout(() => {this.setState({listClass: 'hidden'}); }, 100);}}
+        onFocus={() => { if (this.state.value.length > 0) { this.setState({listClass: ''}); }}}/>
+            <ul className={this.state.listClass + ' suggest-list'}>{this.state.suggestions}</ul>
             <div className="cloud"> {this.renderTags()}
         </div>
             <div className="message">{this.state.message}</div>
