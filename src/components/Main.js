@@ -2,12 +2,10 @@ require('normalize.css/normalize.css');
 require('styles/App.css');
 
 import $ from 'jquery';
-import jsonp from 'jsonp';
 import React from 'react';
+import InputComponent from './tags/InputComponent';
+import CloudComponent from './tags/CloudComponent';
 
-
-let suggestUrl = 'http://suggestqueries.google.com/complete/search' +
-        '?output=jsonp&client=firefox&q=%23';
 
 let dbUrl = 'https://kvstore.p.mashape.com/collections/hashtags/items/tags';
 
@@ -48,9 +46,7 @@ class AppComponent extends React.Component {
                       listClass: 'hidden',
                       value: '',
                       tags: []};
-        this.handleChange = this.handleChange.bind(this);
         this.removeTag = this.removeTag.bind(this);
-        this.renderTags = this.renderTags.bind(this);
         this.addTag = this.addTag.bind(this);
         this.loadTags = this.loadTags.bind(this);
         this.saveTags = this.saveTags.bind(this);
@@ -58,26 +54,6 @@ class AppComponent extends React.Component {
 
     componentDidMount() {
         this.loadTags();
-    }
-
-    handleChange(event) {
-        let val = event.target.value;
-        this.setState({value: val});
-        if (val.length > 0) {
-            this.setState({listClass: ''});
-        }
-        jsonp(suggestUrl + val,
-              {param: 'jsonp'},
-              (err, data) => {
-                  let suggestions = data[1];
-                  suggestions.unshift(data[0]);
-                  suggestions = suggestions.map((tag, i) => {
-                      tag = (tag.startsWith('#')) ? tag : '#' + tag;
-                      tag = tag.replace(/\s+/g, '');
-                      return <li key={i} onClick={this.addTag(tag)}>
-                          <a>{tag}</a></li>; });
-                  this.setState({suggestions: suggestions}); }
-             );
     }
 
     loadTags() {
@@ -99,7 +75,7 @@ class AppComponent extends React.Component {
 
         }, () => {
             showMessage(this, 'Error saving tags');
-        } , tags);
+        }, tags);
     }
 
     addTag(tag) {
@@ -118,24 +94,13 @@ class AppComponent extends React.Component {
         };
     }
 
-    renderTags() {
-        return this.state.tags.map((tag, i) => { return <div key={i} className="tag">
-                                                 {tag} <div className="remove"
-                                                 onClick={this.removeTag(tag)}><a>×</a></div>
-                                       </div>;});
 
-    }
 
     render() {
         return <div className="main">
             <h1>Twitter Cloud</h1>
-            <input className="tags-input" type="text" value={this.state.value}
-        onChange={this.handleChange}
-        onBlur={() => { setTimeout(() => {this.setState({listClass: 'hidden'}); }, 100);}}
-        onFocus={() => { if (this.state.value.length > 0) { this.setState({listClass: ''}); }}}/>
-            <ul className={this.state.listClass + ' suggest-list'}>{this.state.suggestions}</ul>
-            <div className="cloud"> {this.renderTags()}
-        </div>
+            <InputComponent addTag={this.addTag} />
+            <CloudComponent removeTag={this.removeTag} tags={this.state.tags} />
             <div className="message">{this.state.message}</div>
             <button onClick={this.loadTags} >Load</button>
             <button onClick={this.saveTags} >Save</button>

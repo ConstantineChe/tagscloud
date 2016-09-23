@@ -1,3 +1,28 @@
-.input-component {
-  border: 1px dashed #f00;
+.suggest-list {
+    color: #555;
+    background: white;
+    position: absolute;
+    top: 32%;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+.suggest-list>li>a {
+    padding-left: 5px;
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.suggest-list>li>a:hover {
+    background: #428BCA;
+    color: white;
 }

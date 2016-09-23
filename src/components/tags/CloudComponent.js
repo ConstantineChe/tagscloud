@@ -5,13 +5,18 @@ import React from 'react';
 require('styles/tags/Cloud.css');
 
 class CloudComponent extends React.Component {
-  render() {
-    return (
-      <div className="cloud-component">
-        Please edit src/components/tags//CloudComponent.js to update this component!
-      </div>
-    );
-  }
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return <div className="cloud"> {this.props.tags.map((tag, i) => {
+            return <div key={i} className="tag">
+                {tag} <div className="remove" onClick={this.props.removeTag(tag)}>
+                <a>×</a>
+                </div> </div>; })} </div>;
+    }
 }
 
 CloudComponent.displayName = 'TagsCloudComponent';

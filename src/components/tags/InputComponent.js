@@ -5,8 +5,10 @@ import jsonp from 'jsonp';
 
 require('styles/tags/Input.css');
 
+
 let suggestUrl = 'http://suggestqueries.google.com/complete/search' +
         '?output=jsonp&client=firefox&q=%23';
+
 
 class InputComponent extends React.Component {
 
@@ -14,10 +16,8 @@ class InputComponent extends React.Component {
         super(props);
         this.state = {data: [],
                       listClass: 'hidden',
-                      value: '',
-                      tags: []};
+                      value: ''};
         this.handleChange = this.handleChange.bind(this);
-        this.addTag = this.addTag.bind(this);
     }
 
     handleChange(event) {
@@ -34,14 +34,10 @@ class InputComponent extends React.Component {
                   suggestions = suggestions.map((tag, i) => {
                       tag = (tag.startsWith('#')) ? tag : '#' + tag;
                       tag = tag.replace(/\s+/g, '');
-                      return <li key={i} onClick={this.addTag(tag)}>
+                      return <li key={i} onClick={this.props.addTag(tag)} >
                           <a>{tag}</a></li>; });
                   this.setState({suggestions: suggestions}); }
              );
-    }
-
-    addTag() {
-
     }
 
     render() {
