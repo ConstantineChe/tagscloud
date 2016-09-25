@@ -13,7 +13,7 @@ class CloudComponent extends React.Component {
     render() {
         return <div className="cloud"> {this.props.tags.map((tag, i) => {
             return <div key={i} className="tag">
-                {tag} <div className="remove" onClick={this.props.removeTag(tag)}>
+                {'#' + tag} <div className="remove" onClick={this.props.removeTag(tag)}>
                 <a>×</a>
                 </div> </div>; })} </div>;
     }
